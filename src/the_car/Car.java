@@ -1,5 +1,8 @@
 package the_car;
 
+import car_exceptions.CarNotStartedException;
+import car_exceptions.CarOutOfFuelException;
+
 public class Car {
 
     private boolean started =  false;
@@ -17,15 +20,15 @@ public class Car {
         fuelLevel += 20;
     }
 
-    public boolean drive() {
+    public boolean drive() throws CarNotStartedException, CarOutOfFuelException{
         if (!started) {
-            return false;
+            throw new CarNotStartedException("Error when starting car Car not started");
         }
 
         if (fuelLevel <= 0) {
             started = false;
             fuelLevel = 0;
-            return false;
+            throw new CarOutOfFuelException("Error when starting car Car out of fuel");
         }
 
         fuelLevel -= 5;
